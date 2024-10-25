@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_product_ecommerce_tree_base" model="ir.ui.view">
+        <field name="name">product.tree</field>
+        <field name="model">product.ecommerce</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom" create="0">
+                <field name="name" />
+                <field name="product_id" />
+                <field name="platform" />
+                <field name="sku" />
+                <field name="price" />
+                <field name="quantity" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_product_ecommerce_search_base" model="ir.ui.view">
+        <field name="name">product.search</field>
+        <field name="model">product.ecommerce</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Name" />
+                <field name="product_id" string="Product ID" />
+                <field name="platform" string="Platform" />
+                <field name="sku" string="SKU" />
+                <field name="price" string="Price" />
+                <field name="quantity" string="Quantity" />
+            </search>
+        </field>
+    </record>
+</odoo>

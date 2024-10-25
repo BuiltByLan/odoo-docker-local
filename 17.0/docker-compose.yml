@@ -3,12 +3,16 @@ services:
   web:
     image: o17-base:latest
     depends_on:
-      - db
+      - mydb
     ports:
       - "8069:8069"
-  db:
+    environment:
+    - HOST=mydb
+    - USER=odoo
+    - PASSWORD=myodoo
+  mydb:
     image: postgres:15
     environment:
       - POSTGRES_DB=postgres
-      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_PASSWORD=myodoo
       - POSTGRES_USER=odoo

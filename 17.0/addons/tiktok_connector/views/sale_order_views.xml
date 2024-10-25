@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tiktok_sale_order_view_inherit_ecommerce_sale" model="ir.ui.view">
+        <field name="name">tiktok.sale.order.view.inherit.ecommerce.sale</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="ecommerce_sale.inherit_view_sale_order_ecommerce"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='ecommerce_platform']/group[@id='base_ecommerce']" position="after">
+                <group name="tiktok_so" string="TikTok" invisible="ecommerce_platform != 'tiktok'">
+                    <field name="tiktok_order_id" />
+                    <field name="tiktok_status" />
+                    <field name="tiktok_update_time" />
+                    
+                </group>
+                <group name="package_tiktok" string="Tiktok Package">
+                    <field name="package_id" />
+                    <field name="package_url" />
+                    <field name="tiktok_tracking_number" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

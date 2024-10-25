@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+package_shipping_manager,package_shipping_manager,model_package_shipping,base.group_erp_manager,1,1,1,1
+shipping_document_manager,shipping_document_manager,model_shipping_document,base.group_erp_manager,1,1,1,1
+transport_order_manager,transport_order_manager,model_transport_order,base.group_erp_manager,1,1,1,1

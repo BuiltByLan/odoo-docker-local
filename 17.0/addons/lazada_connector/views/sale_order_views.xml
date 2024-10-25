@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="lazada_sale_order_view_inherit_ecommerce_sale" model="ir.ui.view">
+        <field name="name">lazada.sale.order.view.inherit.ecommerce.sale</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="ecommerce_sale.inherit_view_sale_order_ecommerce"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='ecommerce_platform']/group[@id='base_ecommerce']" position="after">
+                <group name="lazada_so" string="Lazada" invisible="ecommerce_platform != 'lazada'">
+                    <field name="lazada_order_id" />
+                    <field name="lazada_status" />
+                    <field name="lazada_status_update_time" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

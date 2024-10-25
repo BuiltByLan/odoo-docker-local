@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_partner_inherit_shopee_connector" model="ir.ui.view">
+        <field name="name">res.partner.ecommerce.shopee.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="ecommerce_sale.res_partner_inherit_from_ecommerce"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='ecommerce_platform']" position="after">
+                <field name="partner_shopee_id" invisible="ecommerce_platform != 'shopee'" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

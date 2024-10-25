@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="inherit_view_sale_order_ecommerce" model="ir.ui.view">
+        <field name="name">sale.order.ecommerce.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header/field[@name='state']" position="replace">
+                <field name="state" widget="statusbar" statusbar_visible="draft,awaiting_shipment,done,in_transit,delivered" />
+            </xpath>
+            <xpath expr="//notebook/page[@name='customer_signature']" position="after">
+                <page name="ecommerce_platform" string="Ecommerce">
+                    <group id="base_ecommerce">
+                        <field name="create_time_platform" readonly="1"/>
+                        <field name="ecommerce_platform" readonly="1"/>
+                        <field name="is_ecommerce" readonly="1"/>
+                    </group>
+                    <group name="track_document" string="Document">
+                        <field name="tracking_document_id" />
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//field[@name='tax_totals']" position="after">
+                <field name="price_platform_totals" colspan="2" readonly="1"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                <field name="platform_price" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

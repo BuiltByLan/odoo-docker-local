@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+shopee_integration_manager,shopee_integration_manager,model_shopee_integration,base.group_erp_manager,1,1,1,1
+shopee_message_manager,shopee_message_manager,model_shopee_message,base.group_erp_manager,1,1,1,1
