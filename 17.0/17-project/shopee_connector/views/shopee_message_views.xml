@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_shopee_message_form" model="ir.ui.view">
+        <field name="name">view.shopee.message.form</field>
+        <field name="model">shopee.message</field>
+        <field name="arch" type="xml">
+            <form string="Shopee Message">
+                <sheet>
+                    <field name="name" />
+                    <group>
+                        <group>
+                            <field name="code_request" />
+                            <field name="shop_id" />
+                            <field name="order_sn" />
+                            <field name="timestamp" />
+                        </group>   
+                    </group>
+                    <notebook>
+                        <page name="data_raw" string="RAW">
+                            <field name="data_raw" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_shopee_message_tree" model="ir.ui.view">
+        <field name="name">view.shopee.message.tree</field>
+        <field name="model">shopee.message</field>
+        <field name="arch" type="xml">
+            <tree string="Message">
+                <field name="name" />
+                <field name="code_request" />
+                <field name="order_sn" />
+                <field name="status_order" />
+                <field name="shop_id" />
+                <field name="timestamp" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_shopee_message_search" model="ir.ui.view">
+        <field name="name">view.shopee.message.search</field>
+        <field name="model">shopee.message</field>
+        <field name="arch" type="xml">
+            <search string="Message">
+                <field name="name" string="Name"/>
+                <field name="code_request" string="Type"/>
+                <field name="order_sn" string="Order"/>
+                <field name="status_order" string="Status"/>
+                <!-- <separator/>
+                <filter invisible="1" string="Late Activities" name="activities_overdue"
+                    domain="[('my_activity_date_deadline', '&lt;', context_today().strftime('%Y-%m-%d'))]"/> -->
+                <group expand="1" string="Group By">
+                    <filter string="Message Type" name="code_request" context="{'group_by':'code_request'}"/>
+                    <filter string="Order" name="order_sn" context="{'group_by':'order_sn'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_webhook_message_shopee_view" model="ir.actions.act_window">
+        <field name="name">Webhook Shopee</field>
+        <field name="res_model">shopee.message</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_shopee_message_search"/>
+    </record>
+
+    <menuitem id="webhook_shopee_message_view" name="Message" parent="shopee_connector.menu_shopee_product" action="action_webhook_message_shopee_view" sequence="65"/>
+</odoo>

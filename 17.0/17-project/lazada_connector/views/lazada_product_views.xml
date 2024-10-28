@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <!-- View tree -->
+        <record id="view_lazada_product_tree_view_inherit" model="ir.ui.view">
+            <field name="name">lazada.product.tree.view.inherit</field>
+            <field name="model">product.ecommerce</field>
+            <field name="inherit_id" ref="ecommerce_sale.view_product_ecommerce_tree_base"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_id']" position="after">
+                    <field name="lzd_seller_sku" optional="hide" invisible="platform != 'lazada'"/>
+                    <field name="product_lazada_id" optional="hide" invisible="platform != 'lazada'" />
+                    <field name="warehouse_lazada_id" optional="hide" invisible="platform != 'lazada'" />
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_lazada_product" model="ir.actions.act_window">
+            <field name="name">Lazada Products</field>
+            <field name="res_model">product.ecommerce</field>
+            <field name="view_id" ref="lazada_connector.view_lazada_product_tree_view_inherit"/>
+            <field name="domain">[('platform','=','lazada')]</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <record id="action_fetch_data_product_lazada" model="ir.actions.server">
+            <field name="name">Fetch Product</field>
+            <field name="model_id" ref="lazada_connector.model_product_ecommerce"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = model.get_product_lazada_platform()
+            </field>
+        </record>
+
+        <record id="action_sale_order_lazada_view" model="ir.actions.act_window">
+            <field name="name">Sale-Order lazada</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('ecommerce_platform','=','lazada')]</field>
+            <field name="context">{'create': 0, 'edit': 0}</field>
+        </record>
+        <!-- Menu -->
+        <menuitem id="menu_lazada_product" name="Lazada Products" web_icon="lazada_connector,static/description/icon.png" sequence="100"/>
+        <menuitem id="menu_lazada_product_list" name="Lazada Product List" parent="menu_lazada_product" sequence="10"/>
+        <menuitem id="product_lazada_view" name="Product Lazada" parent="menu_lazada_product_list" action="action_lazada_product" sequence="5"/>
+        <menuitem id="product_lazada_fetch" name="Fetch Product Lazada" parent="menu_lazada_product_list" action="action_fetch_data_product_lazada" sequence="50"/>
+        <menuitem id="sale_order_lazada_view" name="Sale-Order" parent="menu_lazada_product" action="action_sale_order_lazada_view" sequence="55"/>
+        
+</odoo>

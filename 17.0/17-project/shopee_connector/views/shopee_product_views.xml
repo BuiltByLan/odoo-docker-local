@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <!-- View tree -->
+        <record id="view_shopee_product_tree_view_inherit" model="ir.ui.view">
+            <field name="name">shopee.product.tree.view.inherit</field>
+            <field name="model">product.ecommerce</field>
+            <field name="inherit_id" ref="ecommerce_sale.view_product_ecommerce_tree_base"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_id']" position="after">
+                    <field name="product_shopee_id" optional="hide" invisible="platform != 'shopee'" />
+                    <!-- <field name="warehouse_shopee_id" invisible="platform != 'shopee'" /> -->
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_shopee_product" model="ir.actions.act_window">
+            <field name="name">Shopee Products</field>
+            <field name="res_model">product.ecommerce</field>
+            <field name="view_id" ref="shopee_connector.view_shopee_product_tree_view_inherit"/>
+            <field name="domain">[('platform','=','shopee')]</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <record id="action_fetch_data_product_shopee" model="ir.actions.server">
+            <field name="name">Fetch Product</field>
+            <field name="model_id" ref="shopee_connector.model_product_ecommerce"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = model.save_product_shopee_list_data()
+            </field>
+        </record>
+
+        <record id="action_sale_order_shopee_view" model="ir.actions.act_window">
+            <field name="name">Sale-Order Shopee</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('ecommerce_platform','=','shopee')]</field>
+            <field name="context">{'create': 0, 'edit': 0}</field>
+        </record>
+        <!-- Menu -->
+        <menuitem id="menu_shopee_product" name="Shopee Products" web_icon="shopee_connector,static/description/icon.png" sequence="105"/>
+        <menuitem id="menu_shopee_product_list" name="Shopee Product List" parent="menu_shopee_product" sequence="10"/>
+        <menuitem id="product_shopee_view" name="Product Shopee" parent="menu_shopee_product_list" action="action_shopee_product" sequence="5"/>
+        <menuitem id="product_shopee_fetch" name="Fetch Product Shopee" parent="menu_shopee_product_list" action="action_fetch_data_product_shopee" sequence="50"/>
+        <menuitem id="sale_order_shopee_view" name="Sale-Order" parent="menu_shopee_product" action="action_sale_order_shopee_view" sequence="55"/>
+        
+</odoo>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="shopee_sale_order_view_inherit_ecommerce_sale" model="ir.ui.view">
+        <field name="name">shopee.sale.order.view.inherit.ecommerce.sale</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="ecommerce_sale.inherit_view_sale_order_ecommerce"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='ecommerce_platform']/group[@id='base_ecommerce']" position="after">
+                <group name="shopee_so" string="Shopee" invisible="ecommerce_platform != 'shopee'">
+                    <field name="shopee_order_id" readonly="1"/>
+                    <field name="shopee_status" readonly="1"/>
+                    <field name="shopee_update_time" readonly="1"/>
+                </group>
+                <group name="shopee_tracking" string="Tracking" invisible="ecommerce_platform != 'shopee'">
+                    <field name="shopee_tracking_number" readonly="1"/>
+                    <field name="shopee_package_number" readonly="1"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

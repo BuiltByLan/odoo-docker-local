@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_lazada_connector" model="ir.ui.view">
+        <field name="name">res.config.settings.lazada.connector.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="lazada_config" string="Lazada" name="lazada" groups="base.group_erp_manager">
+                    <block title="Authentication" name="lazada_authen_container">
+                        <setting id="auth_url_lazada" string="Auth URL">
+                            <field name="auth_url_lazada" required="0" />
+                        </setting>
+                        <setting>
+                            <field name="app_key_lazada" required="0" />
+                        </setting>
+                        <setting>
+                            <field name="app_secret_lazada" required="0" />
+                        </setting> 
+                        <setting>
+                            <field name="api_service_lazada" required="0" />
+                        </setting>
+                        <setting>
+                            <field name="auth_service_lazada" invisible="1" required="0"/>
+                        </setting>   
+                        <setting>
+                            <field name="access_lazada_token" />
+                        </setting>
+                        <setting>
+                            <field name="refresh_lazada_token" />
+                        </setting>
+                        <setting>
+                            <field name="expires_lazada_in" />
+                        </setting>
+                        <setting>
+                            <field name="lazada_oauth_code" invisible="access_lazada_token != False" />
+                        </setting>
+                        <br/>
+                        <!-- <button name="action_lazada_access_token" type="object"
+                            string="Authorize App" class="btn btn-primary"
+                            invisible="access_lazada_token != False" />
+                        <br/> -->
+                        <div class="mt16" invisible="access_lazada_token == False">
+                            <i class="text-success fa fa-check-circle-o" aria-hidden="true"/>
+                            <span class="text-success" style="padding: 5px;"> Connect Success</span>
+                        </div>
+                    </block>
+                    <block title="Settings" name="lazada_setting_container">
+                        <setting id="pricelist_lazada_id" help="Price List of Lazada API" string="Price List">
+                            <field name="pricelist_lazada_id" required="0" />
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>

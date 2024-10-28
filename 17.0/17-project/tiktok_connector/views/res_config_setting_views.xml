@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_tiktok_connector" model="ir.ui.view">
+        <field name="name">res.config.settings.tiktok.connector.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="tiktok_config" string="TikTok" name="tiktok" groups="base.group_erp_manager">
+                    <block title="Authentication" name="tiktok_authen_container">
+                        <setting id="url_tiktok" help="URL of TikTok API" string="URL">
+                            <field name="url_tiktok" required="1" />
+                        </setting>
+                        <setting>
+                            <field name="app_key_tiktok" required="1" />
+                        </setting>
+                        <setting>
+                            <field name="app_secret_tiktok" required="1" />
+                        </setting> 
+                        <setting>
+                            <field name="token_tiktok" required="0" />
+                        </setting>
+                        <setting>
+                            <field name="url_auth_tiktok" required="0" invisible="1" />
+                        </setting>   
+                        <setting>
+                            <field name="refresh_token_tiktok" />
+                        </setting>
+                        <setting>
+                            <field name="shop_cipher_key" />
+                        </setting>
+                        <setting>
+                            <field name="shop_id" />
+                        </setting>
+                        <br/>
+                        <button name="get_token_tiktok_button" type="object"
+                            string="Authorize App" class="btn btn-primary"
+                            invisible="token_tiktok != False" />
+                        <br/>
+                        <div class="mt16" invisible="token_tiktok == False">
+                            <i class="text-success fa fa-check-circle-o" aria-hidden="true"/>
+                            <span class="text-success" style="padding: 5px;"> Connect Success</span>
+                        </div>
+                    </block>
+                    <block title="Settings" name="tiktok_setting_container">
+                        <setting id="pricelist_id" help="Price List of TikTok API" string="Price List">
+                            <field name="pricelist_id" required="0" />
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>

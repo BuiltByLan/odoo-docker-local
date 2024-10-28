@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_tiktok_message_form" model="ir.ui.view">
+        <field name="name">view.tiktok.message.form</field>
+        <field name="model">tiktok.message</field>
+        <field name="arch" type="xml">
+            <form string="TikTok Message">
+                <sheet>
+                    <field name="name" />
+                    <group>
+                        <group>
+                            <field name="type_request" />
+                            <field name="tts_notification_id" />
+                            <field name="shop_id" />
+                            <field name="order_id" />
+                            <field name="tiktok_order_status" />
+                            <field name="timestamp" />
+                        </group>   
+                    </group>
+                    <notebook>
+                        <page name="data_raw" string="RAW">
+                            <field name="data_raw" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_tiktok_message_tree" model="ir.ui.view">
+        <field name="name">view.tiktok.message.tree</field>
+        <field name="model">tiktok.message</field>
+        <field name="arch" type="xml">
+            <tree string="Message">
+                <field name="name" />
+                <field name="type_request" />
+                <field name="order_id" />
+                <field name="tiktok_order_status" />
+                <field name="tts_notification_id" />
+                <field name="timestamp" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_tiktok_message_search" model="ir.ui.view">
+        <field name="name">view.tiktok.message.search</field>
+        <field name="model">tiktok.message</field>
+        <field name="arch" type="xml">
+            <search string="Message">
+                <field name="name" string="Name"/>
+                <field name="type_request" string="Type"/>
+                <field name="order_id" string="Order"/>
+                <!-- <separator/>
+                <filter invisible="1" string="Late Activities" name="activities_overdue"
+                    domain="[('my_activity_date_deadline', '&lt;', context_today().strftime('%Y-%m-%d'))]"/> -->
+                <group expand="1" string="Group By">
+                    <filter string="Message Type" name="type_request" context="{'group_by':'type_request'}"/>
+                    <filter string="Order" name="order_id" context="{'group_by':'order_id'}"/>
+                    <filter string="Status" name="tiktok_order_status" context="{'group_by':'tiktok_order_status'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_webhook_message_tiktok_view" model="ir.actions.act_window">
+        <field name="name">Webhook TikTok</field>
+        <field name="res_model">tiktok.message</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_tiktok_message_search"/>
+    </record>
+
+    <menuitem id="webhook_tiktok_message_view" name="Message" parent="tiktok_connector.menu_tiktok_product" action="action_webhook_message_tiktok_view" sequence="65"/>
+</odoo>

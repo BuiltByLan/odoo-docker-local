@@ -1,17 +1,20 @@
 version: '3.1'
 services:
   web:
-    image: o17-base:latest
+    image: o17-1:latest
     depends_on:
       - mydb
     ports:
       - "8069:8069"
     environment:
     - HOST=mydb
+    - PORT=5432
     - USER=odoo
     - PASSWORD=myodoo
   mydb:
     image: postgres:15
+    ports:
+      - "5432:5432"
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=myodoo

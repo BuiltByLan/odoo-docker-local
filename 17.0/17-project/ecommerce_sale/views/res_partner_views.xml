@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <record id="res_partner_inherit_from_ecommerce" model="ir.ui.view">
+        <field name="name">res.partner.ecommerce.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page name="ecommerce_sale" string="Ecommerce">
+                    <group>
+                        <field name="is_ecommerce" />
+                        <field name="ecommerce_platform" />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
